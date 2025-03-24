@@ -10,6 +10,7 @@ typedef struct Post{
 typedef struct Utilisateur{
     int id;
     char pseudo[20];
+    int nb_amis;
     struct Utilisateur **ami;
     struct Post *post;
 } Utilisateur;
@@ -19,7 +20,8 @@ typedef struct Reseau{
     int nb_utilisateurs;
 } Reseau;
 
-Utilisateur *creerUtilisateur(int id, char *pseudo, Reseau *reseau);
+void ajouterUtilisteur(Utilisateur *user, Reseau *reseau);
+Utilisateur *creerUtilisateur(int id, char *pseudo);
 
 void afficherUtilisateur(Utilisateur *user);
 void afficherAmis(Utilisateur *user);
