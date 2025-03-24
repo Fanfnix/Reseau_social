@@ -11,7 +11,7 @@ int main() {
         return 0;
     }
 
-    int compteur_user = 0;
+    int compteur_user = 1;
     for (compteur_user; compteur_user < 5; compteur_user++) {
         char pseudo[20]; sprintf(pseudo, "user-%d", compteur_user);
         Utilisateur *user = creerUtilisateur(compteur_user, pseudo);
@@ -37,7 +37,7 @@ int main() {
             case 0: run = 0; break;
             case 1: clear(); nouveauUtilisateur(reseau, compteur_user); compteur_user++; break;
             case 2: clear(); afficherListeUtilisateurs(reseau); break;
-            case 3: menuUtilisateur(reseau); break;
+            case 3: clear(); menuUtilisateur(reseau); break;
         }
     } while (run);
 

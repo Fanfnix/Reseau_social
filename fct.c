@@ -37,6 +37,7 @@ void ajouterUtilisteur(Utilisateur *user, Reseau *reseau) {
     return;
 }
 
+
 Utilisateur *creerUtilisateur(int id, char *pseudo) {
     Utilisateur *user = malloc(sizeof(Utilisateur));
     if (user != NULL) {
@@ -49,6 +50,7 @@ Utilisateur *creerUtilisateur(int id, char *pseudo) {
     }
     return user;
 }
+
 
 void nouveauUtilisateur(Reseau *reseau, int compteur_user) {
     char pseudo[20];
@@ -71,6 +73,7 @@ void afficherUtilisateur(Utilisateur *user) {
     printf("+-------------------------------+\n");
 }
 
+
 int afficherListeUtilisateurs(Reseau *reseau) {
     for (int i = 0; i < reseau->nb_utilisateurs; i++) afficherUtilisateur(reseau->utilisateurs[i]);
     int choix = 0;
@@ -86,12 +89,13 @@ int afficherListeUtilisateurs(Reseau *reseau) {
 
 void menuUtilisateur(Reseau *reseau) {
     int id_user = afficherListeUtilisateurs(reseau);
-    Utilisateur *user = reseau->utilisateurs[id_user];
+    if (id_user == 0) return;
+    Utilisateur *user = reseau->utilisateurs[id_user-1];
     int run = 1;
     int choix_user;
     do {
         clear();
-        printf("---< RESEAU >---\n");
+        printf("---< %s >---\n", user->pseudo);
         do {
             printf("0. Quitter\n");
             printf("1. Ajouter ami\n");
@@ -105,10 +109,10 @@ void menuUtilisateur(Reseau *reseau) {
         } while (choix_user < 0 || choix_user > 4);
         switch (choix_user) {
             case 0: run = 0; break;
-            case 1: clear(); ajouterAmi(user, ami, reseau); break; // On demandera ami dans la fonction ajouterAmi
+            case 1: clear(); ajouterAmi(user, reseau); break;
             case 2: clear(); publierPost(user); break;
             case 3: clear(); afficherAmis(user); break;
-            case 4: clear(); afficherPost(user); break;
+            case 4: clear(); afficherPost(user); break; // A revoir
         }
     } while (run);
 }
@@ -134,6 +138,7 @@ void afficherAmis(Utilisateur *user) {
     } while (choix);
 }
 
+
 void afficherPost(Utilisateur *user) {
     if(user == NULL){
         printf("Utilisateur inexistant\n");
@@ -156,33 +161,26 @@ void afficherPost(Utilisateur *user) {
 }
 
 
-void ajouterAmi(Utilisateur *user, Utilisateur *ami, Reseau *reseau){
-    if(user == NULL || ami == NULL){
+void ajouterAmi(Utilisateur *user, Reseau *reseau) {
+    if(user == NULL){
         printf("Utilisateur inexistant\n");
         return;
     }
     if (user->amis != NULL) {
-        user->amis = realloc(user->amis, (user->nb_amis +1) * sizeof(Utilisateur *));
-        for (int i = 1; i <= reseau->nb_utilisateurs; i++) afficherUtilisateur(reseau->utilisateurs[i]);
-        printf("Choisissez un ami a ajouter avec son id : \n");
-        int id = scanf("%d", &id);
-        for (int i = 0; i < reseau->nb_utilisateurs; i++)
-        {
-            if (id == reseau->utilisateurs[i]->id)
-            {
-                user->amis[user->nb_amis] = reseau->utilisateurs[i];
-                user->nb_amis++;
-            }
-            else
-            {
-                printf("Id inexistant\n");
-            }
-        }
-        printf("%s est desormais votre ami, vous avez maintenant %d amis\n",reseau->utilisateurs[*ami->pseudo], user->nb_amis);
+        user->amis = realloc(user->amis, (user->nb_amis+1) * sizeof(Utilisateur *));
+        Utilisateur *ami;
+        do {
+            int id_ami = afficherListeUtilisateurs(reseau);
+            ami = reseau->utilisateurs[id_ami-1];
+        } while (user == ami);
+        user->amis[user->nb_amis] = ami;
+        user->nb_amis++;
+        printf("%s est desormais votre ami, vous avez maintenant %d amis\n",ami->pseudo, user->nb_amis);
         return;
     }
-    printf("Erreur ajout amis pour user-%d\n", user->id);
+    printf("Erreur ajout amis pour %s\n", user->pseudo);
 }
+
 
 void publierPost(Utilisateur *user) {
     if(user == NULL) {
@@ -199,4 +197,29 @@ void publierPost(Utilisateur *user) {
             }
         }
     }
+}
+
+
+void detruireUtilisateur(Utilisateur *user) {
+    return;
+}
+
+
+void detruireAmis(Utilisateur *user) {
+    return;
+}
+
+
+void detruirePost(Post *post) {
+    return;
+}
+
+
+void libUtilisateur(Utilisateurs *user) {
+    return;
+}
+
+
+void libReseau(Reseau *reseau) {
+    return;
 }

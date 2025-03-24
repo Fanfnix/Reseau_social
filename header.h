@@ -39,12 +39,14 @@ void menuUtilisateur(Reseau *reseau);
 void afficherAmis(Utilisateur *user);
 void afficherPost(Utilisateur *user);
 
-void ajouterAmi(Utilisateur *user, Utilisateur *ami, Reseau *reseau);
+void ajouterAmi(Utilisateur *user, Reseau *reseau);
 void publierPost(Utilisateur *user);
 
 void detruireUtilisateur(Utilisateur *user);
 void detruireAmis(Utilisateur *user);
 void detruirePost(Post *post);
 
+void libUtilisateur(Utilisateurs *user);
+void libReseau(Reseau *reseau);
 
 #endif
