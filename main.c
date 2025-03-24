@@ -30,14 +30,14 @@ int main() {
             printf("3. Aller sur un utilisateur\n");
             printf("Choix : ");
             scanf("%d", &choix_principale);
-            if (choix_principale < 0 || choix_principale > 2) printf("Choix '%d' est incorrect\n", choix_principale);
+            if (choix_principale < 0 || choix_principale > 3) printf("Choix '%d' est incorrect\n", choix_principale);
             printf("----------------\n");
-        } while (choix_principale < 0 || choix_principale > 2);
+        } while (choix_principale < 0 || choix_principale > 3);
         switch (choix_principale) {
             case 0: run = 0; break;
             case 1: clear(); nouveauUtilisateur(reseau, compteur_user); compteur_user++; break;
             case 2: clear(); afficherListeUtilisateurs(reseau); break;
-            // case 3: menuUtilisateur(); break;
+            case 3: menuUtilisateur(reseau); break;
         }
     } while (run);
 

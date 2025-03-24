@@ -5,7 +5,7 @@
 
 typedef struct Post {
     int id;
-    char contenu[100];
+    char contenu[500];
     struct Post *suivant;
 } Post;
 
@@ -29,17 +29,18 @@ Reseau *initReseau();
 
 void ajouterUtilisteur(Utilisateur *user, Reseau *reseau);
 Utilisateur *creerUtilisateur(int id, char *pseudo);
-
 void nouveauUtilisateur(Reseau *reseau, int compteur_user);
 
 void afficherUtilisateur(Utilisateur *user);
 int afficherListeUtilisateurs(Reseau *reseau);
 
+void menuUtilisateur(Reseau *reseau);
+
 void afficherAmis(Utilisateur *user);
 void afficherPost(Utilisateur *user);
 
 void ajouterAmi(Utilisateur *user, Utilisateur *ami, Reseau *reseau);
-void puiblierPost(Utilisateur *user, char *contenu);
+void publierPost(Utilisateur *user);
 
 void detruireUtilisateur(Utilisateur *user);
 void detruireAmis(Utilisateur *user);

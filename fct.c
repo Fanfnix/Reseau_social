@@ -84,6 +84,36 @@ int afficherListeUtilisateurs(Reseau *reseau) {
 }
 
 
+void menuUtilisateur(Reseau *reseau) {
+    int id_user = afficherListeUtilisateurs(reseau);
+    Utilisateur *user = reseau->utilisateurs[id_user];
+    int run = 1;
+    int choix_user;
+    do {
+        clear();
+        printf("---< RESEAU >---\n");
+        do {
+            printf("0. Quitter\n");
+            printf("1. Ajouter ami\n");
+            printf("2. Publier Post\n");
+            printf("3. Afficher amis\n");
+            printf("4. Afficher post\n");
+            printf("Choix : ");
+            scanf("%d", &choix_user);
+            if (choix_user < 0 || choix_user > 4) printf("Choix '%d' est incorrect\n", choix_user);
+            printf("----------------\n");
+        } while (choix_user < 0 || choix_user > 4);
+        switch (choix_user) {
+            case 0: run = 0; break;
+            case 1: clear(); ajouterAmi(user, ami, reseau); break; // On demandera ami dans la fonction ajouterAmi
+            case 2: clear(); publierPost(user); break;
+            case 3: clear(); afficherAmis(user); break;
+            case 4: clear(); afficherPost(user); break;
+        }
+    } while (run);
+}
+
+
 void afficherAmis(Utilisateur *user) {
     if(user == NULL){
         printf("Utilisateur inexistant\n");
@@ -97,6 +127,11 @@ void afficherAmis(Utilisateur *user) {
             printf("\n--------------------\n");
         }
     }
+    int choix = 1;
+    do {
+        printf("Entrez '0' pour quitter : ");
+        scanf("%d", &choix);
+    } while (choix);
 }
 
 void afficherPost(Utilisateur *user) {
@@ -113,6 +148,11 @@ void afficherPost(Utilisateur *user) {
         post = post->suivant;
         printf("--------------------\n");
     }
+    int choix;
+    do {
+        printf("Entrez '0' pour quitter : ");
+        scanf("%d", &choix);
+    } while (choix);
 }
 
 
@@ -144,13 +184,19 @@ void ajouterAmi(Utilisateur *user, Utilisateur *ami, Reseau *reseau){
     printf("Erreur ajout amis pour user-%d\n", user->id);
 }
 
-void publierPost(Utilisateur *user, char *contenu){
-    if(user == NULL){
+void publierPost(Utilisateur *user) {
+    if(user == NULL) {
         printf("Utilisateur inexistant\n");
         return;
     } else {
         if (user->post != NULL) {
-            // suite
+            Post *post = malloc(sizeof(Post));
+            if (post != NULL) {
+                printf("Contenu :\n");
+                scanf("%s", &post->contenu);
+                post->suivant = user->post;
+                user->post = post;
+            }
         }
     }
 }
