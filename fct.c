@@ -33,7 +33,7 @@ void afficherUtilisateur(Utilisateur *user){
     }
 
     printf("--------------------\n");
-    printf("Pseudo : %s\nId : %d", user->pseudo, user->id);
+    printf("Pseudo : %s\nId : %d\n", user->pseudo, user->id);
     printf("--------------------\n");
 }
 

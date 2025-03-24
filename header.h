@@ -27,7 +27,7 @@ void afficherUtilisateur(Utilisateur *user);
 void afficherAmis(Utilisateur *user);
 void afficherPost(Utilisateur *user);
 
-void ajouterAmi(Utilisateur *user, Utilisateur *ami);
+void ajouterAmi(Utilisateur *user, Utilisateur *ami, Reseau *reseau);
 void puiblierPost(Utilisateur *user, char *contenu);
 
 void detruireUtilisateur(Utilisateur *user);

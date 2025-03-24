@@ -18,10 +18,8 @@ int main() {
         ajouterUtilisteur(user, reseau);
     }
 
-    Utilisateur *user_tmp;
     for (int i = 0; i < reseau->nb_utilisateurs; i++) {
-        user_tmp = reseau->utilisateurs[i];
-        printf("USER : id=%d, pseudo=%s\n", user_tmp->id, user_tmp->pseudo);
+        afficherUtilisateur(reseau->utilisateurs[i]);
     }
 
     return 0;
