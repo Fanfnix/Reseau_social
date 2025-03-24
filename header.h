@@ -30,5 +30,9 @@ void afficherPost(Utilisateur *user);
 void ajouterAmi(Utilisateur *user, Utilisateur *ami);
 void puiblierPost(Utilisateur *user, char *contenu);
 
+void detruireUtilisateur(Utilisateur *user);
+void detruireAmis(Utilisateur *user);
+void detruirePost(Post *post);
+
 
 #endif
