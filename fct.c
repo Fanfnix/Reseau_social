@@ -222,6 +222,9 @@ void detruireAmis(Utilisateur *user) {
 
 
 void detruirePost(Utilisateur *user) {
+    Post *tmp= user->post;
+    user->post=user->post->suivant;
+    libPost(tmp);
     return;
 }
 
