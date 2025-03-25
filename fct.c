@@ -189,11 +189,13 @@ void publierPost(Utilisateur *user) {
     } else {
         if (user->post == NULL) {
             user->post = malloc(sizeof(Post));
-            printf("Contenu :\n");
-            getchar();
-            fgets(user->post->contenu, 500, stdin);
-            user->post->id = 0;
-            user->post->suivant = NULL;
+            if (user->post != NULL) {
+                printf("Contenu :\n");
+                getchar();
+                fgets(user->post->contenu, 500, stdin);
+                user->post->id = 0;
+                user->post->suivant = NULL;
+            }
         } else {
             Post *post = malloc(sizeof(Post));
             if (post != NULL) {
