@@ -112,7 +112,7 @@ void menuUtilisateur(Reseau *reseau) {
             case 1: clear(); ajouterAmi(user, reseau); break;
             case 2: clear(); publierPost(user); break;
             case 3: clear(); afficherAmis(user); break;
-            case 4: clear(); afficherPost(user); break; // A revoir
+            case 4: clear(); afficherPost(user); break; 
         }
     } while (run);
 }
@@ -221,7 +221,7 @@ void detruireAmis(Utilisateur *user) {
 }
 
 
-void detruirePost(Post *post) {
+void detruirePost(Utilisateur *user) {
     return;
 }
 
