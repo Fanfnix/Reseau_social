@@ -9,7 +9,7 @@ OBJFILES = $(patsubst %.c, %.o, $(SRCFILES))
 all: main
 
 main: $(OBJFILES)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o reseau $^
 
 %.o: %.c
 	$(CC) $(LDFLAGS) -o $@ -c $<
@@ -20,4 +20,4 @@ clean:
 	rm -rf *.o
 
 mrproper: clean
-	rm -rf $(EXEC)
+	rm -rf reseau
