@@ -214,12 +214,27 @@ void detruirePost(Post *post) {
     return;
 }
 
-
-void libUtilisateur(Utilisateur *user) {
-    return;
+void libPost(Post *post) {
+    if (post == NULL) return;
+    Post *post_tmp = post->suivant;
+    free(post);
+    post = NULL;
+    libPost(post_tmp);
 }
 
+void libUtilisateur(Utilisateur *user) {
+    free(user->amis);
+    user->amis = NULL;
+    libPost(user->post);
+    free(user);
+    user = NULL;
+}
 
 void libReseau(Reseau *reseau) {
-    return;
+    for (int i = 0; i < reseau->nb_utilisateurs; i++) {
+        free(reseau->utilisateurs[i]);
+        reseau->utilisateurs[i] = NULL;
+    }
+    free(reseau);
+    reseau = NULL;
 }

@@ -41,5 +41,7 @@ int main() {
         }
     } while (run);
 
+    libReseau(reseau);
+
     return 0;
 }
