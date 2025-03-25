@@ -13,7 +13,7 @@ int main() {
 
     int compteur_user = 1;
     for (compteur_user; compteur_user < 5; compteur_user++) {
-        char pseudo[20]; sprintf(pseudo, "user-%d", compteur_user);
+        char pseudo[20]; sprintf(pseudo, "Michel%d", compteur_user);
         Utilisateur *user = creerUtilisateur(compteur_user, pseudo);
         ajouterUtilisteur(user, reseau);
     }

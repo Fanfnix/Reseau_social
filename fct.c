@@ -18,7 +18,6 @@ Reseau *initReseau() {
     Reseau *reseau = malloc(sizeof(Reseau));
     if (reseau != NULL) {
         reseau->nb_utilisateurs = 0;
-        reseau->size = 1;
         reseau->utilisateurs = malloc(sizeof(Utilisateur*));
         if (reseau->utilisateurs == NULL) printf("Erreur allocation liste utilisateurs\n");
     }

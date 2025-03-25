@@ -19,7 +19,6 @@ typedef struct Utilisateur {
 
 typedef struct Reseau {
     Utilisateur **utilisateurs;
-    int size;
     int nb_utilisateurs;
 } Reseau;
 
