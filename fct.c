@@ -45,7 +45,7 @@ Utilisateur *creerUtilisateur(int id, char *pseudo) {
         strcpy(user->pseudo, pseudo);
         user->nb_amis = 0;
         user->amis = malloc(sizeof(Utilisateur*));
-        user->post = malloc(sizeof(Post));
+        user->post = NULL;
         if (DEBUG) printf("%s cree avec succes\n", user->pseudo);
     }
     return user;
@@ -80,8 +80,8 @@ int afficherListeUtilisateurs(Reseau *reseau) {
     do {
         printf("Entrez id Utilisateur ou '0' pour quitter : ");
         scanf("%d", &choix);
-        if (choix < 0 || choix > reseau->nb_utilisateurs-1) printf("Choix '%d' incorrect\n", choix);
-    } while (choix < 0 || choix > reseau->nb_utilisateurs-1);
+        if (choix < 0 || choix > reseau->nb_utilisateurs) printf("Choix '%d' incorrect\n", choix);
+    } while (choix < 0 || choix > reseau->nb_utilisateurs);
     
     return choix;
 }
@@ -187,11 +187,20 @@ void publierPost(Utilisateur *user) {
         printf("Utilisateur inexistant\n");
         return;
     } else {
-        if (user->post != NULL) {
+        if (user->post == NULL) {
+            user->post = malloc(sizeof(Post));
+            printf("Contenu :\n");
+            getchar();
+            fgets(user->post->contenu, 500, stdin);
+            user->post->id = 0;
+            user->post->suivant = NULL;
+        } else {
             Post *post = malloc(sizeof(Post));
             if (post != NULL) {
                 printf("Contenu :\n");
-                scanf("%s", &post->contenu);
+                getchar();
+                fgets(post->contenu, 500, stdin);
+                post->id = user->post->id+1;
                 post->suivant = user->post;
                 user->post = post;
             }
