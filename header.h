@@ -42,11 +42,12 @@ void afficherPost(Utilisateur *user);
 void ajouterAmi(Utilisateur *user, Reseau *reseau);
 void publierPost(Utilisateur *user);
 
-void detruireUtilisateur(Utilisateur *user);
-void detruireAmis(Utilisateur *user);
 void detruirePost(Utilisateur *user);
 
 void libUtilisateur(Utilisateur *user);
 void libReseau(Reseau *reseau);
+void libPost(Post *post);
+
+void tempo();
 
 #endif

@@ -4,6 +4,7 @@
 #include "header.h"
 
 
+
 void clear() {
     #if __linux__
     system("clear");
@@ -58,12 +59,14 @@ void nouveauUtilisateur(Reseau *reseau, int compteur_user) {
     scanf("%s", &pseudo);
     Utilisateur *user = creerUtilisateur(compteur_user, pseudo);
     ajouterUtilisteur(user, reseau);
+    tempo();
 }
 
 
 void afficherUtilisateur(Utilisateur *user) {
     if(user == NULL){
         printf("Utilisateur inexistant\n");
+        tempo();
         return;
     }
     printf("+-------------------------------+\n");
@@ -102,17 +105,19 @@ void menuUtilisateur(Reseau *reseau) {
             printf("2. Publier Post\n");
             printf("3. Afficher amis\n");
             printf("4. Afficher post\n");
+            printf("5. Supprimer le dernier post\n");
             printf("Choix : ");
             scanf("%d", &choix_user);
-            if (choix_user < 0 || choix_user > 4) printf("Choix '%d' est incorrect\n", choix_user);
+            if (choix_user < 0 || choix_user > 5) printf("Choix '%d' est incorrect\n", choix_user);
             printf("----------------\n");
-        } while (choix_user < 0 || choix_user > 4);
+        } while (choix_user < 0 || choix_user > 5);
         switch (choix_user) {
             case 0: run = 0; break;
             case 1: clear(); ajouterAmi(user, reseau); break;
             case 2: clear(); publierPost(user); break;
             case 3: clear(); afficherAmis(user); break;
-            case 4: clear(); afficherPost(user); break; 
+            case 4: clear(); afficherPost(user); break;
+            case 5: clear(); detruirePost(user); break; 
         }
     } while (run);
 }
@@ -121,6 +126,7 @@ void menuUtilisateur(Reseau *reseau) {
 void afficherAmis(Utilisateur *user) {
     if(user == NULL){
         printf("Utilisateur inexistant\n");
+        tempo();
         return;
     }
     printf("--------------------\n");
@@ -131,17 +137,14 @@ void afficherAmis(Utilisateur *user) {
             printf("\n--------------------\n");
         }
     }
-    int choix = 1;
-    do {
-        printf("Entrez '0' pour quitter : ");
-        scanf("%d", &choix);
-    } while (choix);
+    tempo();
 }
 
 
 void afficherPost(Utilisateur *user) {
     if(user == NULL){
         printf("Utilisateur inexistant\n");
+        tempo();
         return;
     }
     printf("--------------------\n");
@@ -153,17 +156,14 @@ void afficherPost(Utilisateur *user) {
         post = post->suivant;
         printf("--------------------\n");
     }
-    int choix;
-    do {
-        printf("Entrez '0' pour quitter : ");
-        scanf("%d", &choix);
-    } while (choix);
+    tempo();
 }
 
 
 void ajouterAmi(Utilisateur *user, Reseau *reseau) {
     if(user == NULL){
         printf("Utilisateur inexistant\n");
+        tempo();
         return;
     }
     if (user->amis != NULL) {
@@ -179,12 +179,14 @@ void ajouterAmi(Utilisateur *user, Reseau *reseau) {
         return;
     }
     printf("Erreur ajout amis pour %s\n", user->pseudo);
+    tempo();
 }
 
 
 void publierPost(Utilisateur *user) {
     if(user == NULL) {
         printf("Utilisateur inexistant\n");
+        tempo();
         return;
     } else {
         if (user->post == NULL) {
@@ -211,22 +213,25 @@ void publierPost(Utilisateur *user) {
 }
 
 
-void detruireUtilisateur(Utilisateur *user) {
-    return;
-}
-
-
-void detruireAmis(Utilisateur *user) {
-    return;
-}
-
-
 void detruirePost(Utilisateur *user) {
+    if(user == NULL) {
+        printf("Utilisateur inexistant\n");
+        tempo();
+        return;
+    }
+    if(user->post == NULL) {
+        printf("Aucun post a supprimer\n");
+        tempo();
+        return;
+    }
     Post *tmp= user->post;
     user->post=user->post->suivant;
     libPost(tmp);
+    printf("Dernier post supprime\n");
+    tempo();
     return;
 }
+
 
 void libPost(Post *post) {
     if (post == NULL) return;
@@ -236,6 +241,7 @@ void libPost(Post *post) {
     libPost(post_tmp);
 }
 
+
 void libUtilisateur(Utilisateur *user) {
     free(user->amis);
     user->amis = NULL;
@@ -244,6 +250,7 @@ void libUtilisateur(Utilisateur *user) {
     user = NULL;
 }
 
+
 void libReseau(Reseau *reseau) {
     for (int i = 0; i < reseau->nb_utilisateurs; i++) {
         free(reseau->utilisateurs[i]);
@@ -251,4 +258,13 @@ void libReseau(Reseau *reseau) {
     }
     free(reseau);
     reseau = NULL;
+}
+
+
+void tempo(){
+    int choix = 1;
+    do {
+        printf("Entrez '0' pour quitter : ");
+        scanf("%d", &choix);
+    } while (choix);
 }
