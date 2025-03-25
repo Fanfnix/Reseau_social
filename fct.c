@@ -215,7 +215,7 @@ void detruirePost(Post *post) {
 }
 
 
-void libUtilisateur(Utilisateurs *user) {
+void libUtilisateur(Utilisateur *user) {
     return;
 }
 

@@ -46,7 +46,7 @@ void detruireUtilisateur(Utilisateur *user);
 void detruireAmis(Utilisateur *user);
 void detruirePost(Post *post);
 
-void libUtilisateur(Utilisateurs *user);
+void libUtilisateur(Utilisateur *user);
 void libReseau(Reseau *reseau);
 
 #endif
