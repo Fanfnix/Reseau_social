@@ -175,6 +175,7 @@ void ajouterAmi(Utilisateur *user, Reseau *reseau) {
         user->amis[user->nb_amis] = ami;
         user->nb_amis++;
         printf("%s est desormais votre ami, vous avez maintenant %d amis\n",ami->pseudo, user->nb_amis);
+        tempo();
         return;
     }
     printf("Erreur ajout amis pour %s\n", user->pseudo);
