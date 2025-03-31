@@ -27,7 +27,7 @@ Reseau *initReseau() {
 
 void ajouterUtilisteur(Utilisateur *user, Reseau *reseau) {
     if (user == NULL) {
-        if (DEBUG) printf("Erreur a l'ajout de %s : user = NULL\n", user->pseudo);
+        if (DEBUG) printf("Erreur a l'ajout de user : user = NULL\n");
         return;
     }
     reseau->utilisateurs = realloc(reseau->utilisateurs, (reseau->nb_utilisateurs+1) * sizeof(Utilisateur*));
